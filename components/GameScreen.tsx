@@ -246,10 +246,11 @@ const GameScreen: React.FC<GameScreenProps> = ({ setMusicUrl }) => {
       {showChoices && currentScene.choices && (
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-full z-20 flex flex-col items-center justify-center">
           <div className="w-full max-w-xl animate-fade-in space-y-4">
-            <div className="text-center mb-4 p-4 bg-black/70 rounded-lg border border-cyan-700/50">
-                <h2 className="text-2xl text-cyan-400 mb-2">【 你的處境 】</h2>
-                <p className="text-cyan-200 text-lg">{currentScene.situation}</p>
-            </div>
+            {currentScene.situation && (
+                <div className="text-center mb-4 p-4 bg-black/70 rounded-lg border border-cyan-700/50">
+                    <p className="text-cyan-200 text-lg whitespace-pre-line">{currentScene.situation}</p>
+                </div>
+            )}
             {currentScene.choices
               .filter(choice => choice.condition ? choice.condition({ playerStats, flags }) : true)
               .map((choice, index) => (

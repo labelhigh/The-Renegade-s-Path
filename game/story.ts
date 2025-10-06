@@ -813,11 +813,11 @@ export const story: StoryData = {
         '束手就擒吧，蕭遠。你的路，到頭了。'
       ]
     },
-    situation: '【結局】\n宿命的終結。你將獨自面對整個朝廷的力量。你的結局，將由你一路走來的所作所為決定。',
+    situation: '宿命的終結。\n你的結局，將由你一路走來的所作所為決定。',
     choices: [
       { text: '我命由我不由天！', nextSceneId: 'ending_high_righteousness', condition: ({ playerStats }) => playerStats.righteousness >= 30 },
       { text: '我命由我不由天！', nextSceneId: 'ending_low_righteousness', condition: ({ playerStats }) => playerStats.righteousness <= -30 },
-      { text: '我命由我不由天！', nextSceneId: 'ending_neutral', condition: ({ playerStats }) => playerStats.righteousness > -30 && playerStats.righteousness < 30 },
+      { text: '我命由我不由天！', nextSceneId: 'ending_neutral', condition: ({ playerStats }) => playerStats.righteousness < 30 && playerStats.righteousness > -30 },
     ]
   },
   // --- 結局: 俠之大者（高仁義值） ---

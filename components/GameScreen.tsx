@@ -11,6 +11,14 @@ interface GameScreenProps {
   setMusicUrl: (url: string | null) => void;
 }
 
+const getTitleForRighteousness = (righteousness: number): string => {
+  if (righteousness >= 50) return '義薄雲天';
+  if (righteousness >= 20) return '江湖大俠';
+  if (righteousness <= -50) return '邪魔外道';
+  if (righteousness <= -20) return '冷血無情';
+  return '赤龍寨二當家';
+};
+
 const GameScreen: React.FC<GameScreenProps> = ({ setMusicUrl }) => {
   const [playerStats, setPlayerStats] = useState<PlayerStats>(INITIAL_PLAYER_STATS);
   const [flags, setFlags] = useState<GameFlags>({});
@@ -32,23 +40,6 @@ const GameScreen: React.FC<GameScreenProps> = ({ setMusicUrl }) => {
     setMusicUrl(currentScene.music || null);
   }, [currentScene, setMusicUrl]);
 
-  const updateTitle = useCallback(() => {
-    let newTitle = playerStats.title;
-    if (playerStats.righteousness >= 50 && newTitle !== '義薄雲天') newTitle = '義薄雲天';
-    else if (playerStats.righteousness >= 20 && newTitle !== '江湖大俠') newTitle = '江湖大俠';
-    else if (playerStats.righteousness <= -50 && newTitle !== '邪魔外道') newTitle = '邪魔外道';
-    else if (playerStats.righteousness <= -20 && newTitle !== '冷血無情') newTitle = '冷血無情';
-    else if (playerStats.righteousness > -20 && playerStats.righteousness < 20 && newTitle !== '赤龍寨二當家') newTitle = '赤龍寨二當家';
-    
-    if (playerStats.title !== newTitle) {
-      setPlayerStats(prev => ({ ...prev, title: newTitle }));
-    }
-  }, [playerStats.righteousness, playerStats.title]);
-
-  useEffect(() => {
-    updateTitle();
-  }, [playerStats.righteousness, updateTitle]);
-
   const handleChoice = useCallback((choice: Choice) => {
     if (isRevealingText || isTransitioning) return;
 
@@ -59,7 +50,14 @@ const GameScreen: React.FC<GameScreenProps> = ({ setMusicUrl }) => {
         newStats.internalEnergy = Math.min(prevStats.maxInternalEnergy, (prevStats.internalEnergy + (choice.effects.internalEnergy || 0)));
         newStats.money += choice.effects.money || 0;
         newStats.righteousness += choice.effects.righteousness || 0;
-        if (choice.effects.title) newStats.title = choice.effects.title;
+        
+        // If the choice explicitly sets a title, use it. Otherwise, calculate based on new righteousness.
+        // This makes the state update atomic and prevents race conditions.
+        if (choice.effects.title) {
+          newStats.title = choice.effects.title;
+        } else {
+          newStats.title = getTitleForRighteousness(newStats.righteousness);
+        }
       }
       return newStats;
     });
@@ -92,7 +90,10 @@ const GameScreen: React.FC<GameScreenProps> = ({ setMusicUrl }) => {
     setWaitingForConfirmation(false);
     setShowDialogue(false);
     setShowChoices(false);
-    setSceneText(scene.description.join('\n\n'));
+    
+    const textToDisplay = scene.description.join('\n\n');
+
+    setSceneText(textToDisplay);
     setBackground(scene.image || '');
   }, []);
 
@@ -102,6 +103,8 @@ const GameScreen: React.FC<GameScreenProps> = ({ setMusicUrl }) => {
 
   const handleTextRevealFinish = () => {
     setIsRevealingText(false);
+    // Unified flow for all scenes: always wait for user confirmation after text reveal.
+    // This simplifies logic and prevents potential state issues with special "ending scene" handling.
     setWaitingForConfirmation(true);
   };
 

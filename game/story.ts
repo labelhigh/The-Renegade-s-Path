@@ -651,7 +651,7 @@ export const story: StoryData = {
     },
     situation: '龍嘯天已經瘋了。他不僅要拖著僅存的兄弟去送死，更要脅持無辜的家眷。這已不再是復仇，而是純粹的瘋狂。你心中的那根弦，終於繃斷了。',
     choices: [
-      { text: '【仁德路線】夠了！龍嘯天，你瘋了！我絕不會讓你傷害他們！', nextSceneId: 'rebel_path_start', effects: { righteousness: 25 } },
+      { text: '【仁德路線】夠了！龍嘯天，你瘋了！我絕不會讓你傷害他們！', nextSceneId: 'rebel_path_start', effects: { righteousness: 15 } },
       { text: '【忠義路線】……大哥，我跟你幹到底。', nextSceneId: 'loyalty_path_dark_ending', effects: { righteousness: -50 } },
     ]
   },
@@ -813,7 +813,7 @@ export const story: StoryData = {
         '束手就擒吧，蕭遠。你的路，到頭了。'
       ]
     },
-    situation: '宿命的終結。你將獨自面對整個朝廷的力量。你的結局，將由你一路走來的所作所為決定。',
+    situation: '【結局】\n宿命的終結。你將獨自面對整個朝廷的力量。你的結局，將由你一路走來的所作所為決定。',
     choices: [
       { text: '我命由我不由天！', nextSceneId: 'ending_high_righteousness', condition: ({ playerStats }) => playerStats.righteousness >= 30 },
       { text: '我命由我不由天！', nextSceneId: 'ending_low_righteousness', condition: ({ playerStats }) => playerStats.righteousness <= -30 },

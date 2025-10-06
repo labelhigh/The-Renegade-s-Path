@@ -817,7 +817,7 @@ export const story: StoryData = {
     choices: [
       { text: '我命由我不由天！', nextSceneId: 'ending_high_righteousness', condition: ({ playerStats }) => playerStats.righteousness >= 30 },
       { text: '我命由我不由天！', nextSceneId: 'ending_low_righteousness', condition: ({ playerStats }) => playerStats.righteousness <= -30 },
-      { text: '我命由我不由天！', nextSceneId: 'ending_neutral' },
+      { text: '我命由我不由天！', nextSceneId: 'ending_neutral', condition: ({ playerStats }) => playerStats.righteousness > -30 && playerStats.righteousness < 30 },
     ]
   },
   // --- 結局: 俠之大者（高仁義值） ---

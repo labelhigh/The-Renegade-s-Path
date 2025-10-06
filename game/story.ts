@@ -28,7 +28,7 @@ const XINGER_TITLE = '村民';
 // --- Character Portraits ---
 const PORTRAIT_LONG_XIAOTIAN = 'https://i.pinimg.com/1200x/de/41/a4/de41a42050ade0505f5bd16aa077a748.jpg'; // 龍嘯天頭像 (Long Xiaotian's portrait)
 const PORTRAIT_PLAYER = 'https://i.pinimg.com/1200x/a3/fc/f5/a3fcf5ecd30980861fd6418171db8250.jpg'; // 玩家頭像 (Player's portrait)
-const PORTRAIT_TIE_NIU = 'https://i2.kknews.cc/dTj4bHzgEqeM_pEv-SeJuV-Az95ODhz6LWJtUNw/0.jpg'; // 鐵牛頭像 (Tie Niu's portrait)
+const PORTRAIT_TIE_NIU = 'https://i.pinimg.com/736x/29/33/67/293367336390485c8a23f92f1df575ae.jpg'; // 鐵牛頭像 (Tie Niu's portrait)
 const PORTRAIT_SHEN_CANG = 'https://i.pinimg.com/736x/d1/66/92/d16692b78ee2dbb24a2dbb175ebcdf81.jpg'; // 沈蒼頭像 (Shen Cang's portrait)
 const PORTRAIT_TRAITOR = 'https://i.pinimg.com/736x/eb/0a/64/eb0a641ab6a8c7da1e31d795b29d2f62.jpg'; // 瘦猴頭像 (Skinny Monkey's portrait)
 const PORTRAIT_LAO_GUI = 'https://i.pinimg.com/1200x/38/91/d7/3891d7388809b0cfed0c1aa6d6b112e7.jpg'; // 老鬼頭像 (Lao Gui's portrait)
